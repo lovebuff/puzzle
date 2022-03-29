@@ -1,0 +1,21 @@
+<canvas style="width: {{board_volume}}px;height: {{board_volume}}px;" type="2d" id="myCanvas" />
+<view class="quency">移动次数：{{frequency}}</view>
+<view class="puzzle_index" style="--board_width--: {{board_volume + 50}}rpx;--piece_width--: {{board_volume / 4}}rpx;">
+  <view 
+    wx:for="{{board_list}}" wx:key="board" 
+    style="left:{{axis[item.index].x}}rpx;top:{{axis[item.index].y}}rpx;"
+    bindtap="switch_tab" data-index="{{item.index}}"
+  >
+    <view wx:if="{{!item.src || show}}"
+      style="{{show?'background:rgba(0, 0, 0, 0.08);':''}}"
+    >
+      {{item.value}}
+    </view>
+    <image wx:if="{{item.src}}" src="{{item.src}}"></image>
+  </view>
+</view>
+<button bindtap="reset">重新开始</button>
+<button bindtap="upload">上传图片拼图</button>
+<button bindtap="show_tab" wx:if="{{board_src}}">{{show?'隐藏':'显示'}}数字</button>
+<button bindtap="preview" wx:if="{{board_src}}">查看拼图图片</button>
+<button bindtap="reset" data-status="true" wx:if="{{board_src}}">切换数字拼图</button>
